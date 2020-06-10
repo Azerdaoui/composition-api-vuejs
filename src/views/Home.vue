@@ -1,6 +1,7 @@
 <template>
   <div>
     {{ number }}
+    {{ string }}
   </div>
 </template>
 
@@ -9,10 +10,16 @@
 
   export default {
     setup(){
-      const number = ref(0)
+      let number = ref(0)
+      let string = ref('abc')
+
+      setInterval(() => {
+        number.value++
+      }, 1000)
 
       return{
-        number
+        number,
+        string
       }
     }
   }
