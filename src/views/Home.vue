@@ -1,14 +1,19 @@
 <template>
   <div>
-    Home
+    {{ number }}
   </div>
 </template>
 
 <script>
+  import { ref } from '@vue/composition-api'
 
-export default {
-  name: 'Home',
-  components: {
+  export default {
+    setup(){
+      const number = ref(0)
+
+      return{
+        number
+      }
+    }
   }
-}
 </script>
