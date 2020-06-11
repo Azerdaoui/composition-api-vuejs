@@ -1,25 +1,22 @@
 <template>
   <div>
+    {{ name }} {{ password }}
     {{ number }}
-    {{ string }}
   </div>
 </template>
 
 <script>
-  import { ref } from '@vue/composition-api'
+  import { reactive } from '@vue/composition-api'
 
   export default {
     setup(){
-      let number = ref(0)
-      let string = ref('abc')
+      const form = reactive({
+        name: 'Othmane',
+        password: 'password'
+      })
 
-      setInterval(() => {
-        number.value++
-      }, 1000)
-
-      return{
-        number,
-        string
+      return {
+        ...form
       }
     }
   }
