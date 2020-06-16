@@ -1,27 +1,33 @@
 <template>
   <div>
-    {{ name }} {{ password }}
-    {{ number }}
+    <form>
+      <input type="text" v-model="form.name">
+      <input type="password" v-model="form.password">
+    </form>
+
+    {{ form }}
   </div>
 </template>
 
 <script>
-  import { reactive, toRefs, ref } from '@vue/composition-api'
+  import { ref, reactive } from '@vue/composition-api'
 
   export default {
     setup(){
-      const form = reactive({
-        name: 'Othmane',
-        password: 'password'
-      })
-      const number = ref(1000)
+      // with ref
+      // const name = ref('')
+      // const password = ref('')
 
-      console.log(form)
-      console.log(toRefs(form))
+      // with reactive
+      const form = reactive({
+        name:'name',
+        password:'password'
+      })
+
+      const data = { ...form }
 
       return {
-        ...toRefs(form),
-        number
+        form,
       }
     }
   }
