@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import { reactive } from '@vue/composition-api'
+  import { reactive, toRefs, ref } from '@vue/composition-api'
 
   export default {
     setup(){
@@ -14,9 +14,14 @@
         name: 'Othmane',
         password: 'password'
       })
+      const number = ref(1000)
+
+      console.log(form)
+      console.log(toRefs(form))
 
       return {
-        ...form
+        ...toRefs(form),
+        number
       }
     }
   }
