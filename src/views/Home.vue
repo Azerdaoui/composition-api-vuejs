@@ -1,33 +1,29 @@
 <template>
   <div>
-    <form>
-      <input type="text" v-model="form.name">
-      <input type="password" v-model="form.password">
-    </form>
-
-    {{ form }}
+    <button @click="increment">Increment</button>
+    <button @click="decrement">Decrement</button>
+    {{ number }}
   </div>
 </template>
 
 <script>
-  import { ref, reactive } from '@vue/composition-api'
+  import { ref } from '@vue/composition-api'
 
   export default {
     setup(){
-      // with ref
-      // const name = ref('')
-      // const password = ref('')
+      const number = ref(0)
 
-      // with reactive
-      const form = reactive({
-        name:'name',
-        password:'password'
-      })
-
-      const data = { ...form }
+      function increment () {
+        number.value++
+      } 
+      function decrement () {
+        number.value--
+      }
 
       return {
-        form,
+        number,
+        increment,
+        decrement
       }
     }
   }
