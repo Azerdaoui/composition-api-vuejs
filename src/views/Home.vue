@@ -1,30 +1,30 @@
 <template>
   <div>
-    <button @click="increment">Increment</button>
-    <button @click="decrement">Decrement</button>
-    {{ number }}
+    <div v-for="user in users" :key="user.id">{{ user.name }}</div>
   </div>
 </template>
 
 <script>
-  import { ref } from '@vue/composition-api'
+  import { reactive, onMounted, toRefs } from '@vue/composition-api'
 
   export default {
     setup(){
-      const number = ref(0)
+      const state = reactive({
+        users: [],
+      })
 
-      function increment () {
-        number.value++
-      } 
-      function decrement () {
-        number.value--
+      function getUsers() { 
+        state.users = [{id: 1, name: 'Othmane'}, {id: 2, name: 'Alex'}]
       }
 
+      onMounted ( () => {
+        getUsers()
+      })
+
       return {
-        number,
-        increment,
-        decrement
+        ...toRefs(state)
       }
     }
   }
 </script>
+  
