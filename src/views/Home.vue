@@ -1,27 +1,26 @@
 <template>
   <div>
-    <div v-for="user in users" :key="user.id">{{ user.name }}</div>
+    {{ name }} {{ nameShouting }}  <br>
+    {{ username }} {{ usernameShouting }}
   </div>
 </template>
 
 <script>
-  import { reactive, onMounted, toRefs } from '@vue/composition-api'
+  import { ref, computed, reactive, toRefs } from '@vue/composition-api'
 
   export default {
     setup(){
+      const name = ref('Othmane')
+      const nameShouting = computed(() => name.value.toUpperCase())
+
       const state = reactive({
-        users: [],
-      })
-
-      function getUsers() { 
-        state.users = [{id: 1, name: 'Othmane'}, {id: 2, name: 'Alex'}]
-      }
-
-      onMounted ( () => {
-        getUsers()
+        username: 'Technotic',
+        usernameShouting: computed(() => state.username.toUpperCase())
       })
 
       return {
+        name,
+        nameShouting,
         ...toRefs(state)
       }
     }
