@@ -1,33 +1,27 @@
 <template>
   <div>
-    <form>
-      <input type="text" v-model="form.name">
-      <input type="password" v-model="form.password">
-    </form>
-
-    {{ form }}
+    <User v-for="user in users" :key="user.id" :user="user" />
   </div>
 </template>
 
 <script>
-  import { ref, reactive } from '@vue/composition-api'
+  import { ref } from '@vue/composition-api'
 
+  import User from './User'
+ 
   export default {
+    components: {
+      User
+    },
+    
     setup(){
-      // with ref
-      // const name = ref('')
-      // const password = ref('')
-
-      // with reactive
-      const form = reactive({
-        name:'name',
-        password:'password'
-      })
-
-      const data = { ...form }
+      const users =ref([
+        {id: 1, name:'Othmane'},
+        {id: 2, name:'Ahmed'}
+      ])
 
       return {
-        form,
+        users
       }
     }
   }
