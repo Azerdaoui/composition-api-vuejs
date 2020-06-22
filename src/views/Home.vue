@@ -1,28 +1,53 @@
 <template>
   <div>
-    <User v-for="user in users" :key="user.id" :user="user" />
+    {{ number }}
   </div>
 </template>
 
 <script>
-  import { ref } from '@vue/composition-api'
-
-  import User from './User'
+  import { ref, watchEffect, watch, reactive, toRefs } from '@vue/composition-api'
  
   export default {
-    components: {
-      User
-    },
-    
     setup(){
-      const users =ref([
-        {id: 1, name:'Othmane'},
-        {id: 2, name:'Ahmed'}
-      ])
+      // using ref()
+      // const number = ref(0)
 
-      return {
-        users
-      }
+      // setInterval( () => {
+      //   number.value ++
+      // }, 1000)
+
+      // watchEffect( () => {
+      //   console.log('watchEffect: ' + number.value)
+      // })
+
+      // watch( number, (number, previous) => {
+      //   console.log('watch: ' + number + ' -  ' + previous)
+      // })
+
+      // using reactive
+      const state = reactive({
+        number: 0
+      })
+
+      setInterval( () => {
+        state.number ++
+      }, 1000)
+
+      watchEffect( () => {
+        console.log('watchEffect: ' + state.number)
+      })
+
+      // watch( () => state.number, (number, previous) => {
+      //   console.log('watch: ' + number + ' -  ' + previous)
+      // })
+
+      watch(() => state, (state) => {
+        console.log('changed ' + state.number)
+      }, {
+        deep: true
+      })
+
+      return toRefs(state)
     }
   }
 </script>
